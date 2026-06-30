@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.85rem;
+
+    /* ===== Light mode = Travertine ===== */
+    --background: 42 33% 91%;          /* #F1EBDD travertine */
+    --foreground: 209 47% 13%;         /* #11202F navy ink */
+    --card: 40 50% 97%;                /* #FBF7EF */
+    --card-foreground: 209 47% 13%;
+    --popover: 40 50% 97%;
+    --popover-foreground: 209 47% 13%;
+    --primary: 41 51% 54%;             /* #C9A24B gold */
+    --primary-foreground: 209 60% 10%;
+    --secondary: 209 40% 16%;          /* navy */
+    --secondary-foreground: 40 40% 95%;
+    --muted: 42 24% 84%;
+    --muted-foreground: 210 14% 38%;
+    --accent: 41 60% 88%;
+    --accent-foreground: 209 47% 13%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 22% 78%;
+    --input: 40 22% 80%;
+    --ring: 41 51% 54%;
+  }
+
+  .dark {
+    /* ===== Dark mode = Navy Luxury ===== */
+    --background: 213 65% 6%;          /* #060E1A — deeper midnight navy */
+    --foreground: 42 40% 93%;          /* #F4EEDE cream */
+    --card: 213 52% 11%;               /* #0B1D30 — elevated surface */
+    --card-foreground: 42 40% 93%;
+    --popover: 213 55% 9%;
+    --popover-foreground: 42 40% 93%;
+    --primary: 41 58% 58%;             /* #C9A24B gold */
+    --primary-foreground: 213 65% 6%;
+    --secondary: 213 42% 16%;
+    --secondary-foreground: 42 40% 93%;
+    --muted: 213 38% 14%;
+    --muted-foreground: 213 18% 56%;
+    --accent: 41 35% 18%;
+    --accent-foreground: 42 55% 90%;
+    --destructive: 0 58% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 213 32% 19%;
+    --input: 213 32% 17%;
+    --ring: 41 58% 58%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv01", "kern";
+  }
+  /* numerals & latin always in latin face for crisp data */
+  .tnum { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
+
+  ::selection { background: rgba(201, 162, 75, 0.28); }
+
+  /* refined scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 99px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--primary) / 0.5); background-clip: content-box; }
+}
+
+@layer components {
+  /* ===== Signature: glass panel with gold hairline (MNC card) ===== */
+  .mnc-card {
+    @apply relative rounded-xl border border-border bg-card/80 backdrop-blur-xl;
+    box-shadow: 0 2px 6px rgba(6,18,31,.08), 0 18px 40px -18px rgba(6,18,31,.3);
+  }
+  .dark .mnc-card {
+    /* in dark mode shadows on dark bg are invisible — use inset highlight + glow instead */
+    box-shadow:
+      inset 0 1px 0 0 rgba(201,162,75,.10),
+      0 4px 32px -4px rgba(0,0,0,.65),
+      0 1px 3px rgba(0,0,0,.4);
+  }
+  .mnc-card::before {
+    content: "";
+    position: absolute; inset-inline: 1.25rem; top: 0; height: 1px;
+    background: theme("backgroundImage.gold-line");
+    opacity: .5;
+  }
+  .dark .mnc-card::before { opacity: .7; }
+
+  /* glass surface for sidebars/topbars */
+  .glass {
+    @apply backdrop-blur-xl;
+    background: hsl(var(--card) / 0.72);
+  }
+  .dark .glass {
+    background: hsl(var(--card) / 0.82);
+    border-color: hsl(var(--border) / 0.7);
+  }
+
+  /* gold gradient text for headings/brand */
+  .text-gold-gradient {
+    background: linear-gradient(120deg, #9C7A30, #C9A24B 38%, #E2C879 60%, #C9A24B);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* blueprint drafting background — the platform's signature texture */
+  .blueprint-bg {
+    background-image: theme("backgroundImage.blueprint");
+    background-size: 28px 28px;
+  }
+  .dark .blueprint-bg {
+    background-image:
+      linear-gradient(rgba(201,162,75,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,75,.045) 1px, transparent 1px);
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-medium uppercase tracking-[0.22em] text-primary/80;
+    font-family: var(--font-latin);
+  }
+}
+
+/* RTL/LTR niceties */
+[dir="rtl"] .flip-on-rtl { transform: scaleX(-1); }
