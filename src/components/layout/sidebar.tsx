@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FolderKanban, Plus, Settings, User2, LogOut } from "lucide-react";
+import { LayoutDashboard, FolderKanban, Settings, User2, LogOut, BrainCircuit } from "lucide-react";
 import { Logo } from "./logo";
 import { useI18n } from "@/lib/i18n/provider";
 import { useAuth } from "@/providers/auth-provider";
@@ -17,8 +17,8 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
 
   const items = [
     { href: "/dashboard", label: t.nav.dashboard, icon: LayoutDashboard, show: true },
+    { href: "/architect-ai", label: t.architectAi.nav, icon: BrainCircuit, show: true },
     { href: "/projects", label: t.nav.projects, icon: FolderKanban, show: can(user?.role, "project.view") },
-    { href: "/projects/new", label: t.nav.newProject, icon: Plus, show: can(user?.role, "project.create") },
     { href: "/settings", label: t.nav.settings, icon: Settings, show: can(user?.role, "settings.manage") },
     { href: "/profile", label: t.nav.profile, icon: User2, show: true },
   ].filter((i) => i.show);

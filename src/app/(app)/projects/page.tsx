@@ -27,7 +27,7 @@ export default function ProjectsPage() {
           <h1 className="text-2xl font-bold tracking-tight">{t.projects.title}</h1>
         </div>
         {can(user?.role, "project.create") && (
-          <Link href="/projects/new">
+          <Link href="/architect-ai">
             <Button>
               <Plus className="size-4" /> {t.projects.create}
             </Button>
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
           <h3 className="mt-4 text-lg font-semibold">{t.projects.empty}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{t.projects.emptyHint}</p>
           {can(user?.role, "project.create") && (
-            <Link href="/projects/new" className="mt-5">
+            <Link href="/architect-ai" className="mt-5">
               <Button>
                 <Plus className="size-4" /> {t.projects.create}
               </Button>

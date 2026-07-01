@@ -68,7 +68,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             <Badge variant={statusVariant[project.status]}>{t.status[project.status]}</Badge>
           </h1>
         </div>
-        <Link href={`/projects/${project.id}/workspace`}>
+        <Link href={`/architect-ai?id=${project.id}`}>
           <Button>
             <Sparkles className="size-4" /> {t.projects.workspace}
           </Button>
@@ -102,7 +102,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             )}
           </div>
 
-          <Link href={`/projects/${project.id}/workspace`} className="mnc-card flex items-center justify-between gap-4 p-5 transition-transform hover:-translate-y-0.5">
+          <Link href={`/architect-ai?id=${project.id}`} className="mnc-card flex items-center justify-between gap-4 p-5 transition-transform hover:-translate-y-0.5">
             <div className="flex items-center gap-3">
               <span className="grid size-11 place-items-center rounded-xl bg-primary/10 text-primary">
                 <FileText className="size-5" />

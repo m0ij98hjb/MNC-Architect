@@ -29,25 +29,25 @@
   }
 
   .dark {
-    /* ===== Dark mode = Navy Luxury ===== */
-    --background: 213 65% 6%;          /* #060E1A — deeper midnight navy */
+    /* ===== Dark mode = Pure Black ===== */
+    --background: 0 0% 0%;             /* #000000 pure black */
     --foreground: 42 40% 93%;          /* #F4EEDE cream */
-    --card: 213 52% 11%;               /* #0B1D30 — elevated surface */
+    --card: 0 0% 7%;                   /* #111111 elevated card */
     --card-foreground: 42 40% 93%;
-    --popover: 213 55% 9%;
+    --popover: 0 0% 5%;
     --popover-foreground: 42 40% 93%;
     --primary: 41 58% 58%;             /* #C9A24B gold */
-    --primary-foreground: 213 65% 6%;
-    --secondary: 213 42% 16%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 42 40% 93%;
-    --muted: 213 38% 14%;
-    --muted-foreground: 213 18% 56%;
-    --accent: 41 35% 18%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 52%;
+    --accent: 0 0% 13%;
     --accent-foreground: 42 55% 90%;
     --destructive: 0 58% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 213 32% 19%;
-    --input: 213 32% 17%;
+    --border: 0 0% 16%;
+    --input: 0 0% 13%;
     --ring: 41 58% 58%;
   }
 }
@@ -77,11 +77,10 @@
     box-shadow: 0 2px 6px rgba(6,18,31,.08), 0 18px 40px -18px rgba(6,18,31,.3);
   }
   .dark .mnc-card {
-    /* in dark mode shadows on dark bg are invisible — use inset highlight + glow instead */
     box-shadow:
-      inset 0 1px 0 0 rgba(201,162,75,.10),
-      0 4px 32px -4px rgba(0,0,0,.65),
-      0 1px 3px rgba(0,0,0,.4);
+      inset 0 1px 0 0 rgba(201,162,75,.12),
+      0 0 0 1px rgba(255,255,255,.04),
+      0 4px 24px -4px rgba(0,0,0,.8);
   }
   .mnc-card::before {
     content: "";
@@ -114,8 +113,8 @@
   }
   .dark .blueprint-bg {
     background-image:
-      linear-gradient(rgba(201,162,75,.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,162,75,.045) 1px, transparent 1px);
+      linear-gradient(rgba(201,162,75,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,75,.035) 1px, transparent 1px);
   }
 
   .eyebrow {

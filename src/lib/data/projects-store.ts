@@ -131,6 +131,23 @@ export async function createProject(input: { name: string; client: string; brief
   return project;
 }
 
+export async function updateProject(
+  id: string,
+  updates: Partial<Pick<Project, "name" | "client" | "brief" | "status">>
+): Promise<void> {
+  if (FIREBASE_ENABLED && db) {
+    const { doc, updateDoc } = await import("firebase/firestore");
+    await updateDoc(doc(db, "projects", id), { ...updates, updatedAt: Date.now() });
+    return;
+  }
+  const items = readLS();
+  const i = items.findIndex((p) => p.id === id);
+  if (i >= 0) {
+    Object.assign(items[i], { ...updates, updatedAt: Date.now() });
+    writeLS(items);
+  }
+}
+
 export async function saveReport(id: string, report: ArchitectReport): Promise<void> {
   if (FIREBASE_ENABLED && db) {
     const { doc, updateDoc } = await import("firebase/firestore");

@@ -14,8 +14,9 @@ import { Bar, Doughnut } from "react-chartjs-2";
 ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
 
 const GOLD = "#C9A24B";
-const GOLD_SOFT = "rgba(201,162,75,.35)";
-const GRID = "rgba(148,163,184,.12)";
+const GOLD_SOFT = "rgba(201,162,75,.28)";
+const GRID = "rgba(148,163,184,.10)";
+const TICK = "#6B8BA4";
 
 export function MonthlyBar({ labels, data }: { labels: string[]; data: number[] }) {
   return (
@@ -39,8 +40,8 @@ export function MonthlyBar({ labels, data }: { labels: string[]; data: number[] 
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { display: false }, ticks: { color: "#94a3b8", font: { size: 11 } } },
-          y: { grid: { color: GRID }, ticks: { color: "#94a3b8", font: { size: 11 } }, beginAtZero: true },
+          x: { grid: { display: false }, ticks: { color: TICK, font: { size: 11 } } },
+          y: { grid: { color: GRID }, ticks: { color: TICK, font: { size: 11 } }, beginAtZero: true },
         },
       }}
     />
@@ -60,7 +61,7 @@ export function TypesDoughnut({ labels, data }: { labels: string[]; data: number
         maintainAspectRatio: false,
         cutout: "62%",
         plugins: {
-          legend: { position: "bottom", labels: { color: "#94a3b8", font: { size: 11 }, boxWidth: 10, padding: 12 } },
+          legend: { position: "bottom", labels: { color: TICK, font: { size: 11 }, boxWidth: 10, padding: 12 } },
         },
       }}
     />

@@ -12,7 +12,7 @@ export function Topbar() {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border glass px-4 lg:px-6">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-3 border-b border-border/60 glass px-4 lg:px-6">
       <button
         className="grid size-9 place-items-center rounded-md border border-border lg:hidden"
         onClick={() => setOpenMenu(true)}
