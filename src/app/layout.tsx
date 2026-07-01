@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic, Sora } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -23,6 +23,12 @@ const latin = Sora({
 export const metadata: Metadata = {
   title: "MNC Architect AI — منصة الدراسات المعمارية الذكية",
   description: "تحويل بيانات الأرض إلى تصور معماري متكامل خلال دقائق — MNC Group.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

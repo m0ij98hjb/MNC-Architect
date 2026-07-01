@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Menu, Search, Languages, Sun, Moon } from "lucide-react";
 import { useI18n } from "@/lib/i18n/provider";
 import { useTheme } from "@/providers/theme-provider";
-import { Sidebar } from "./sidebar";
+import { MobileDrawer } from "./mobile-drawer";
 
 export function Topbar() {
   const { t, locale, toggle } = useI18n();
@@ -48,15 +48,7 @@ export function Topbar() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
-      {openMenu && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setOpenMenu(false)} />
-          <div className="absolute inset-y-0 start-0 animate-fade-up">
-            <Sidebar onNavigate={() => setOpenMenu(false)} />
-          </div>
-        </div>
-      )}
+      <MobileDrawer open={openMenu} onClose={() => setOpenMenu(false)} />
     </header>
   );
 }

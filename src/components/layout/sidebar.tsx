@@ -10,10 +10,17 @@ import { can } from "@/lib/rbac/permissions";
 import { ROLE_LABELS } from "@/lib/rbac/permissions";
 import { cn } from "@/lib/utils";
 
-export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
+export function Sidebar({
+  onNavigate,
+  variant = "desktop",
+}: {
+  onNavigate?: () => void;
+  variant?: "desktop" | "mobile";
+}) {
   const { t, locale } = useI18n();
   const { user, signOut } = useAuth();
   const pathname = usePathname();
+  const isMobile = variant === "mobile";
 
   const items = [
     { href: "/dashboard", label: t.nav.dashboard, icon: LayoutDashboard, show: true },
@@ -24,12 +31,19 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   ].filter((i) => i.show);
 
   return (
-    <aside className="flex h-full w-[260px] flex-col gap-2 border-e border-border glass dark:border-border/60">
-      <div className="flex items-center gap-2 px-5 py-5">
+    <aside
+      className={cn(
+        "flex h-full flex-col gap-2 border-e border-border",
+        isMobile
+          ? "w-[280px] max-w-[85vw] overflow-y-auto bg-background pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+          : "w-[260px] glass dark:border-border/60"
+      )}
+    >
+      <div className={cn("flex items-center gap-2 px-5", isMobile ? "py-6" : "py-5")}>
         <Logo />
       </div>
 
-      <nav className="flex-1 space-y-1 px-3">
+      <nav className={cn("flex-1 px-3", isMobile ? "space-y-2" : "space-y-1")}>
         {items.map((item) => {
           const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href) && item.href !== "/projects/new");
           const Icon = item.icon;
@@ -39,13 +53,14 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                "group relative flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium transition-all",
+                "group relative flex items-center gap-3 rounded-md text-sm font-medium transition-all",
+                isMobile ? "px-4 py-3" : "px-3 py-2.5",
                 active ? "bg-primary/12 text-primary" : "text-muted-foreground hover:bg-accent/60 hover:text-foreground"
               )}
             >
               {active && <span className="absolute inset-y-1.5 start-0 w-[3px] rounded-full bg-primary" />}
-              <Icon className="size-[18px]" />
-              {item.label}
+              <Icon className="size-[18px] shrink-0" />
+              <span className="truncate">{item.label}</span>
             </Link>
           );
         })}
@@ -53,7 +68,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
 
       <div className="m-3 rounded-lg border border-border bg-card/60 p-3">
         <div className="mb-2 flex items-center gap-2.5">
-          <div className="grid size-9 place-items-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
+          <div className="grid size-9 shrink-0 place-items-center rounded-full bg-primary/15 text-sm font-semibold text-primary">
             {user?.displayName?.[0]?.toUpperCase() ?? "M"}
           </div>
           <div className="min-w-0 leading-tight">
@@ -65,7 +80,10 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
         </div>
         <button
           onClick={() => signOut()}
-          className="flex w-full items-center justify-center gap-2 rounded-md border border-border px-3 py-2 text-xs text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+          className={cn(
+            "flex w-full items-center justify-center gap-2 rounded-md border border-border text-xs text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive",
+            isMobile ? "px-3 py-2.5" : "px-3 py-2"
+          )}
         >
           <LogOut className="size-3.5" />
           {t.nav.logout}
